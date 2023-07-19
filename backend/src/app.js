@@ -1,5 +1,3 @@
-// import some node modules for later
-
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -8,6 +6,10 @@ const path = require("node:path");
 const express = require("express");
 
 const app = express();
+
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
 
 // use some application-level middlewares
 
@@ -19,6 +21,7 @@ app.use(
   cors({
     origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
     optionsSuccessStatus: 200,
+    credentials: true,
   })
 );
 
