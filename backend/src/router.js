@@ -5,10 +5,9 @@ const router = express.Router();
 const itemControllers = require("./controllers/userControllers");
 // Import des contrôleurs
 const userControllers = require("./controllers/userControllers");
+const workshopAttendeesControllers = require("./controllers/workshopAttendeesControllers");
 const { hashPassword, verifyPassword, sendToken } = require("./services/auth");
 const sundayWorkshopControllers = require("./controllers/sundayWorkshopControllers");
-// const artworkController = require("./controllers/artworkController");
-// const adminController = require("./controllers/adminController");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -41,22 +40,22 @@ router.get("/logout", (req, res) => {
   res.sendStatus(204);
 });
 
-// signin : permet à un utilisateur existant de se connecter avec son email et son mot de passe.
-
 // Routes pour les ateliers du dimanche
 router.get("/workshops", sundayWorkshopControllers.browse);
 // affiches les ateliers
 router.get("/workshops/:id", sundayWorkshopControllers.read);
 // afficher un atelier (avec son id)
-router.get("/workshops/:id", sundayWorkshopControllers.edit);
+router.put("/workshops/:id", sundayWorkshopControllers.edit);
 // éditer un atelier avec son id
 router.post("/workshops/", sundayWorkshopControllers.add);
 // ajouter un atelier
 router.delete("/workshops/:id", sundayWorkshopControllers.destroy);
 // supprimer un atelier
-// router.post("/workshops/:id/signup", sundayWorkshopControllers.signupForWorkshop);
-//   - signupForWorkshop : permet à un utilisateur de s'inscrire à un atelier du dimanche en respectant et en actualisant le nombre maximum de participants.
-// router.delete("/workshops/:id/signup", sundayWorkshopControllers.signoutForWorkshop);
+router.get("/attendees/", workshopAttendeesControllers.browse);
+// afficher les inscrits à un atelier
+router.post("/attendees/", workshopAttendeesControllers.signupForWorkshop);
+// signupForWorkshop : utilisateur s'inscrire à un atelier du dimanche
+router.delete("/attendees/:id", workshopAttendeesControllers.destroy);
 //   - signupForWorkshop : permet à un utilisateur d'annuler l'inscription à un atelier du dimanche en reactualisant le nombre maximum de participants.
 
 module.exports = router;

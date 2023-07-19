@@ -15,9 +15,8 @@ const browse = (req, res) => {
 
 // Contrôleur pour récupérer un utilisateur par son ID
 const read = (req, res) => {
-  const userId = req.params.id;
   models.user
-    .find(userId)
+    .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -30,6 +29,7 @@ const read = (req, res) => {
       res.sendStatus(500);
     });
 };
+
 // Contrôleur pour mettre à jour un utilisateur
 const edit = (req, res) => {
   const user = req.body;
@@ -53,8 +53,6 @@ const edit = (req, res) => {
 // Contrôleur pour ajouter un nouvel utilisateur
 const add = (req, res) => {
   const user = req.body;
-
-  // TODO: Validations (length, format...)
 
   models.user
     .insert(user)

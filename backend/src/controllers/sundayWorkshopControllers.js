@@ -1,7 +1,8 @@
 const models = require("../models");
 
+// Contrôleur pour afficher tous les ateliers du dimanche
 const browse = (req, res) => {
-  models.item
+  models.sunday_workshops
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -12,9 +13,11 @@ const browse = (req, res) => {
     });
 };
 
+// Contrôleur pour afficher un atelier du dimanche par son ID
 const read = (req, res) => {
-  models.item
-    .find(req.params.id)
+  const workshopId = req.params.id;
+  models.sunday_workshops
+    .find(workshopId)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -27,17 +30,14 @@ const read = (req, res) => {
       res.sendStatus(500);
     });
 };
-
+// Contrôleur pour mettre à jour un atelier du dimanche
 const edit = (req, res) => {
-  const item = req.body;
+  const sundayworkshops = req.body;
+  sundayworkshops.id = parseInt(req.params.id, 10);
 
-  // TODO validations (length, format...)
-
-  item.id = parseInt(req.params.id, 10);
-
-  models.item
-    .update(item)
-    .then(([result]) => {
+  models.sunday_workshops
+    .update(sundayworkshops)
+    .then((result) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
@@ -50,15 +50,14 @@ const edit = (req, res) => {
     });
 };
 
+// Contrôleur pour ajouter un nouvel atelier du dimanche
 const add = (req, res) => {
-  const item = req.body;
+  const workshop = req.body;
 
-  // TODO validations (length, format...)
-
-  models.item
-    .insert(item)
-    .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+  models.sunday_workshops
+    .insert(workshop)
+    .then((result) => {
+      res.location(`/workshops/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -66,10 +65,12 @@ const add = (req, res) => {
     });
 };
 
+// Contrôleur pour supprimer un atelier du dimanche
 const destroy = (req, res) => {
-  models.item
-    .delete(req.params.id)
-    .then(([result]) => {
+  const workshopId = req.params.id;
+  models.sunday_workshops
+    .delete(workshopId)
+    .then((result) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
@@ -79,6 +80,38 @@ const destroy = (req, res) => {
     .catch((err) => {
       console.error(err);
       res.sendStatus(500);
+    });
+};
+// Méthode pour l'inscription à un atelier
+const signupForWorkshop = (req, res) => {
+  const userId = req.user.id; // ID de l'utilisateur connecté
+  const workshopId = req.params.id; // ID de l'atelier
+
+  models.sunday_workshops
+    .findOne({ where: { id: workshopId } })
+    .then((workshop) => {
+      if (workshop.currentAttendees < workshop.maxAttendees) {
+        models.workshop_attendees
+          .create({ userId, workshopId })
+          .then(() => {
+            workshop.increment("currentAttendees");
+            res
+              .status(200)
+              .json({ message: "Inscription réussie à l'atelier." });
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500);
+          });
+      } else {
+        res
+          .status(400)
+          .json({ message: "La capacité maximale de l'atelier est atteinte." });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
     });
 };
 
@@ -88,4 +121,5 @@ module.exports = {
   edit,
   add,
   destroy,
+  signupForWorkshop,
 };
