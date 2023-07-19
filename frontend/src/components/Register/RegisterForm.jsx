@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
@@ -37,7 +38,16 @@ function RegisterForm() {
       }
     ).then((response) => {
       if (response.status === 201) {
-        alert("account created, time to login");
+        toast.error("Ton compte existe déjà, Connecte-toi!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       }
     });
   };
