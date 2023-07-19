@@ -17,10 +17,16 @@ router.delete("/items/:id", itemControllers.destroy);
 
 // Routes pour les utilisateurs
 router.get("/user", userControllers.browse);
+// afficher les utilisateurs
 router.get("/user/:id", userControllers.read);
+// afficher un utilisateur grace à son id
 router.put("/user/:id", hashPassword, userControllers.edit);
+// modifie un utilisateur grace à son id
 router.post("/user", hashPassword, userControllers.add);
+// ajouter un utilisateur
 router.delete("/user/:id", userControllers.destroy);
+// supprimer un utilisateur grace à son id
+// ci dessous se connecter
 router.post(
   "/login",
   userControllers.getUserByUsernameWithPasswordAndPassToNext,
