@@ -25,15 +25,14 @@ const hashPassword = async (req, res, next) => {
 };
 
 const verifyPassword = async (req, res, next) => {
-  try {
-    if (await argon2.verify(req.user.hashedPassword, req.body.password)) {
-      next();
-    } else {
-      res.sendStatus(401);
-    }
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
+  const isPasswordOk = await argon2.verify(
+    req.user.hashedPassword,
+    req.body.hashedPassword
+  );
+  if (isPasswordOk) {
+    next();
+  } else {
+    res.sendStatus(401);
   }
 };
 
@@ -50,7 +49,7 @@ const sendToken = (req, res) => {
   res.send({
     user: {
       id: req.user.id,
-      username: req.user.username,
+      email: req.user.email,
     },
   });
 };

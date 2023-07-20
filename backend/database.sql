@@ -22,6 +22,7 @@ USE `azart` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `azart`.`sunday_workshops` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `organizer`VARCHAR(255) NOT NULL,
   `date` DATETIME NOT NULL,
   `address` VARCHAR(255) NOT NULL,
   `maxAttendees` INT NOT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `azart`.`user` (
   `firstname` VARCHAR(255) NOT NULL,
   `lastname` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
+  `hashedPassword` VARCHAR(255) NOT NULL,
   `isAdmin` TINYINT(1) NULL DEFAULT '0',
   `address` VARCHAR(255) NOT NULL,
   `phoneNumber` VARCHAR(20) NOT NULL,
@@ -100,10 +101,10 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Insertion des utilisateurs
 INSERT INTO `azart`.`user` VALUES (1, 'Anne', 'Marchasson', 'annemarchasson@yahoo.fr', '2611', true, '18 chaussée watt 59100 Tourcoing', '0663634662');
 INSERT INTO `azart`.`user` VALUES (2, 'Catherine', 'Tassier', 'catherinetassier@gmail.fr', '1234', false, '12 rue Bir Hakeim 59160 Lomme', '0606060606');
-INSERT INTO `azart`.`user` VALUES (3, 'Sam', 'Smith', 'totosamsmith@gmail.fr', '7896', false, '3 rue de Gand 59000 Lille', '0606060606');
+INSERT INTO `azart`.`user` VALUES (3, 'Sam', 'Smith', 'totosamsmith@gmail.fr', '5678', false, '3 rue de Gand 59000 Lille', '0606060606');
 
 -- Insertion des ateliers du dimanche
-INSERT INTO `azart`.`sunday_workshops` VALUES (1, '2023-08-13 15:30:00', '18 chaussée watt 59100 Tourcoing', 10, 0);
+INSERT INTO `azart`.`sunday_workshops` VALUES (1,'Anne', '2023-08-13 15:30:00', '18 chaussée watt 59100 Tourcoing', 10, 0);
 
 -- Insertion des organisateurs et participants aux ateliers
 INSERT INTO `azart`.`workshop_organizers` VALUES (1, 1, 1);

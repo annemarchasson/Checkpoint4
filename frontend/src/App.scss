@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Saira:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+$color-green:#00AF90;
+$color-green-pastel:#8ED9CB;
+$color-blue:#2B2E72;
+$color-red:#FF4D35;
+$color-yellow:#FFEC5F;
+$color-white:#F9F9F9;
+
+
+$font_content: 'Saira', sans-serif;
+$font-title: 'Dancing Script', cursive;
+
 html,
 body,
 div,
@@ -88,4 +101,47 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.container-max-app {
+  background-image: url("assets/images/backgroundHome.jpg");
+  background-size: cover;
+  height: 100vh; 
+  width: 100vw;
+  
 }
