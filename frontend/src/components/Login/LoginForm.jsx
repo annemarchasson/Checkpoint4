@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import "./Login.scss";
 
 function LoginForm({ setUser }) {
   const emailRef = useRef();
@@ -32,16 +33,30 @@ function LoginForm({ setUser }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="email">email</label>
-        <input type="text" id="email" ref={emailRef} />
+    <form className="form-sub" onSubmit={handleSubmit}>
+      <div className="input-place">
+        <label className="label-workshp" htmlFor="email">
+          email
+        </label>
+        <input
+          className="input-workshop"
+          type="text"
+          id="email"
+          ref={emailRef}
+        />
       </div>
-      <div>
-        <label htmlFor="hashedPassword">mot de passe</label>
-        <input type="password" id="hashedPassword" ref={passwordRef} />
+      <div className="input-place">
+        <label className="label-workshp" htmlFor="hashedPassword">
+          mot de passe
+        </label>
+        <input
+          className="input-workshop"
+          type="password"
+          id="hashedPassword"
+          ref={passwordRef}
+        />
       </div>
-      <button type="submit" onClick={handleClicktoHome}>
+      <button className="btn-add" type="submit" onClick={handleClicktoHome}>
         Valider
       </button>
     </form>

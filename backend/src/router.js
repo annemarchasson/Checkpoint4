@@ -54,13 +54,13 @@ router.get("/workshops/:id", sundayWorkshopControllers.read);
 // afficher un atelier (avec son id)
 router.put("/workshops/:id", sundayWorkshopControllers.edit);
 // éditer un atelier avec son id
-router.post("/workshops/", sundayWorkshopControllers.add);
+router.post("/workshops", sundayWorkshopControllers.add);
 // ajouter un atelier
 router.delete("/workshops/:id", sundayWorkshopControllers.destroy);
 // supprimer un atelier
-router.get("/attendees/", workshopAttendeesControllers.browse);
+router.get("/attendees", workshopAttendeesControllers.browse);
 // afficher les inscrits à un atelier
-router.post("/attendees/", workshopAttendeesControllers.signupForWorkshop);
+router.post("/attendees", workshopAttendeesControllers.signupForWorkshop);
 // signupForWorkshop : utilisateur s'inscrire à un atelier du dimanche
 router.delete("/attendees/:id", workshopAttendeesControllers.destroy);
 //   - signupForWorkshop : permet à un utilisateur d'annuler l'inscription à un atelier du dimanche en reactualisant le nombre maximum de participants.

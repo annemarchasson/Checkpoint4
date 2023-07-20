@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import "./Register.scss";
 
 function RegisterForm() {
   const [firstname, setFirstname] = useState("");
@@ -9,10 +8,7 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const navigate = useNavigate();
-  const handleClicktoHome = () => {
-    navigate("/Workshop");
-  };
+  const [Confirm, setConfirm] = useState(false);
   const handleFirstnameChange = (event) => {
     const newFirstname = event.target.value;
     setFirstname(newFirstname);
@@ -57,72 +53,79 @@ function RegisterForm() {
           phoneNumber,
         }),
       }
-    ).then((response) => {
-      if (response.status === 201) {
-        toast.error("Ton compte existe déjà, Connecte-toi!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      }
+    ).then(() => {
+      setConfirm(true);
     });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="firstname">Prénom</label>
+    <form className="form-sub" onSubmit={handleSubmit}>
+      <div className="input-place">
+        <label className="label-workshp" htmlFor="firstname">
+          Prénom
+        </label>
         <input
+          className="input-workshop"
           type="text"
           id="firstname"
           value={firstname}
           onChange={handleFirstnameChange}
         />
       </div>
-      <div>
-        <label htmlFor="lastname">Nom</label>
+      <div className="input-place">
+        <label className="label-workshp" htmlFor="lastname">
+          Nom
+        </label>
         <input
+          className="input-workshop"
           type="text"
           id="lastname"
           value={lastname}
           onChange={handleLastnameChange}
         />
       </div>
-      <div>
-        <label htmlFor="email">Email</label>
+      <div className="input-place">
+        <label className="label-workshp" htmlFor="email">
+          Email
+        </label>
         <input
+          className="input-workshop"
           type="email"
           id="email"
           value={email}
           onChange={handleEmailChange}
         />
       </div>
-      <div>
-        <label htmlFor="password">Mot de Passe</label>
+      <div className="input-place">
+        <label className="label-workshp" htmlFor="password">
+          Mot de Passe
+        </label>
         <input
+          className="input-workshop"
           type="password"
           id="password"
           value={password}
           onChange={handlePasswordChange}
         />
       </div>
-      <div>
-        <label htmlFor="address">Adresse</label>
+      <div className="input-place">
+        <label className="label-workshp" htmlFor="address">
+          Adresse
+        </label>
         <input
+          className="input-workshop"
           type="text"
           id="address"
           value={address}
           onChange={handleAddressChange}
         />
       </div>
-      <div>
-        <label htmlFor="phoneNumber">Téléphone</label>
+      <div className="input-place">
+        <label className="label-workshp" htmlFor="phoneNumber">
+          Téléphone
+        </label>
         <input
+          className="input-workshop"
           type="text"
           id="phoneNumber"
           value={phoneNumber}
@@ -130,9 +133,14 @@ function RegisterForm() {
         />
       </div>
 
-      <button type="submit" onClick={handleClicktoHome}>
+      <button className="btn-sub" type="submit">
         Valider
       </button>
+      {Confirm && (
+        <h3 className="thank">
+          Tu es bien inscrit(e), maintenant connècte toi !
+        </h3>
+      )}
     </form>
   );
 }

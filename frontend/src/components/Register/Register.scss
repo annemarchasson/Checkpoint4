@@ -1,0 +1,50 @@
+@import "../../App.scss";
+.label-workshp {
+    color: $color-blue;
+    font-family: $font-content;
+    font-size: 4vh;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0vh 0vh 1vh 0vh;
+  }
+  .input-place {
+    display: flex;
+    flex-direction: column;
+    width: 50vh;
+    margin: 3vh auto 3vh auto;
+  }
+  .input-workshop {
+    font-family: $font-content;
+    color: $color-blue;
+    font-size: 3vh;
+    border-radius: 2vh;
+    border: none;
+    padding: 1vh;
+    box-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.35);
+  }
+  .btn-add,
+.btn-sub {
+  font-family: $font_title;
+  font-size: 5vh;
+  border-radius: 5vh;
+  width: 25vh;
+  font-weight: 600;
+  padding: 1vh;
+  border: none;
+  letter-spacing: 0.3vh;
+  color: $color-white;
+  background-color: $color-green;
+  text-align: center;
+  box-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.35);
+}
+.btn-add {
+  color: $color-white;
+  background-color: $color-red;
+  margin: 1vh 1vh 4vh 0vh;
+}
+.btn-sub {
+  color: $color-blue;
+  background-color: $color-yellow;
+  margin: -1vh 0 3vh 0vh;
+}
