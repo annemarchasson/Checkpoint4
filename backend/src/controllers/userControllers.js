@@ -85,21 +85,19 @@ const destroy = (req, res) => {
 
 const getUserByUsernameWithPasswordAndPassToNext = (req, res, next) => {
   models.user
-    .findByUsernameWithPassword(req.body.username)
+    .findByUsernameWithPassword(req.body)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
       } else {
         const [foundUser] = rows;
-
         req.user = foundUser;
-
         next();
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.sendStatus(500).send("user");
     });
 };
 

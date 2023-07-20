@@ -2,22 +2,20 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 function RegisterForm() {
-  const [username, setUsername] = useState("");
+  const [firstname, setUsername] = useState("");
+  // const [lastname, setLastname] = useState("");
+  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState(""):
 
   const handleUsernameChange = (event) => {
     const newUsername = event.target.value;
-
-    // do some validation here
-
     setUsername(newUsername);
   };
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
-
-    // do some validation here
-
     setPassword(newPassword);
   };
 
@@ -25,15 +23,19 @@ function RegisterForm() {
     event.preventDefault();
 
     fetch(
-      `${import.meta.env.VITE_BACKEND_URL ?? "http://localhost:6000"}/users`,
+      `${import.meta.env.VITE_BACKEND_URL ?? "http://localhost:6000"}/user`,
       {
         method: "post",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username,
+          firstname,
+          // lastname,
+          // email,
           password,
+          // address,
+          // phoneNumber,
         }),
       }
     ).then((response) => {
@@ -55,11 +57,11 @@ function RegisterForm() {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="username">username</label>
+        <label htmlFor="username">firstname</label>
         <input
           type="text"
-          id="username"
-          value={username}
+          id="firstname"
+          value={firstname}
           onChange={handleUsernameChange}
         />
       </div>

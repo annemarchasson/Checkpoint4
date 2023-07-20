@@ -7,15 +7,26 @@ class SundayWorkshopManager extends AbstractManager {
 
   insert(workshop) {
     return this.database.query(
-      `INSERT INTO ${this.table} (date, address, maxAttendees) VALUES (?, ?, ?)`,
-      [workshop.date, workshop.address, workshop.maxAttendees]
+      `INSERT INTO ${this.table} (organizer, date, address, maxAttendees) VALUES (?, ?, ?, ?)`,
+      [
+        workshop.organizer,
+        workshop.date,
+        workshop.address,
+        workshop.maxAttendees,
+      ]
     );
   }
 
   update(workshop) {
     return this.database.query(
-      `UPDATE ${this.table} SET date = ?, address = ?, maxAttendees = ? WHERE id = ?`,
-      [workshop.date, workshop.address, workshop.maxAttendees, workshop.id]
+      `UPDATE ${this.table} SET organizer = ?, date = ?, address = ?, maxAttendees = ? WHERE id = ?`,
+      [
+        workshop.organizer,
+        workshop.date,
+        workshop.address,
+        workshop.maxAttendees,
+        workshop.id,
+      ]
     );
   }
 }

@@ -2,13 +2,14 @@ const express = require("express");
 
 const router = express.Router();
 
-const itemControllers = require("./controllers/userControllers");
 // Import des contrôleurs
+const itemControllers = require("./controllers/userControllers");
 const userControllers = require("./controllers/userControllers");
 const workshopAttendeesControllers = require("./controllers/workshopAttendeesControllers");
 const { hashPassword, verifyPassword, sendToken } = require("./services/auth");
 const sundayWorkshopControllers = require("./controllers/sundayWorkshopControllers");
 
+// Routes pour items
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
 router.put("/items/:id", itemControllers.edit);
@@ -26,7 +27,7 @@ router.post("/user", hashPassword, userControllers.add);
 // ajouter un utilisateur
 router.delete("/user/:id", userControllers.destroy);
 // supprimer un utilisateur grace à son id
-// ci dessous se connecter
+// ci dessous se connecter/se deconnecter
 router.post(
   "/login",
   userControllers.getUserByUsernameWithPasswordAndPassToNext,
