@@ -1,37 +1,36 @@
 @import "../../App.scss";
 .container-max-home {
-    background: none;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 .picture-home {
-    width: 30vh;
-    margin-top: 20vh;
-    filter: drop-shadow(0.1em 0.1em 0.3em rgba(7, 53, 40, 0.675));
+  width: 30vh;
+  margin-top: 20vh;
+  filter: drop-shadow(0.1em 0.1em 0.3em rgba(7, 53, 40, 0.675));
 }
 
-  
-.btn-login, .btn-connect {
-    font-family: $font_title;
-    font-size: 7vh;
-    font-weight: 700;
-    border-radius: 5vh;
-    width: 41vh;
-    padding: 1vh;
-    letter-spacing: 0.3vh;
-    list-style-type: none;
-    text-align: center;
-    margin-top: 4vh;
-    box-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.35);
-
+.btn-login,
+.btn-connect {
+  font-family: $font_title;
+  font-size: 7vh;
+  font-weight: 700;
+  border-radius: 5vh;
+  width: 41vh;
+  padding: 1vh;
+  letter-spacing: 0.3vh;
+  list-style-type: none;
+  text-align: center;
+  margin-top: 4vh;
+  box-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.35);
 }
 .btn-connect {
-    color: $color-blue;
-    background-color: $color-yellow;
+  color: $color-blue;
+  background-color: $color-yellow;
 }
 .btn-login {
-    color: $color-white;
-    background-color: $color-red;
+  color: $color-white;
+  background-color: $color-red;
 }
