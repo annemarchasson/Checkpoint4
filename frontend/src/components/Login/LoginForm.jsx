@@ -1,30 +1,31 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function LoginForm({ setUser }) {
-  const usernameRef = useRef();
+  const emailRef = useRef();
   const passwordRef = useRef();
-
+  const navigate = useNavigate();
+  const handleClicktoHome = () => {
+    navigate("/Workshop");
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch(
-      `${import.meta.env.VITE_BACKEND_URL ?? "http://localhost:6000"}/login`,
-      {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          username: usernameRef.current.value,
-          password: passwordRef.current.value,
-        }),
-      }
-    )
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        email: emailRef.current.value,
+        hashedPassword: passwordRef.current.value,
+      }),
+    })
       .then((response) => response.json())
       .then((data) => {
-        console.info("do you see cookie here ?", document.cookie);
+        console.info("cookie?", document.cookie);
 
         setUser(data.user);
       });
@@ -33,14 +34,16 @@ function LoginForm({ setUser }) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="username">username</label>
-        <input type="text" id="username" ref={usernameRef} />
+        <label htmlFor="email">email</label>
+        <input type="text" id="email" ref={emailRef} />
       </div>
       <div>
-        <label htmlFor="password">password</label>
-        <input type="password" id="password" ref={passwordRef} />
+        <label htmlFor="hashedPassword">mot de passe</label>
+        <input type="password" id="hashedPassword" ref={passwordRef} />
       </div>
-      <button type="submit">Go</button>
+      <button type="submit" onClick={handleClicktoHome}>
+        Valider
+      </button>
     </form>
   );
 }
